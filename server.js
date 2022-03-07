@@ -16,7 +16,10 @@ app.route('/getUrl')
         axios.get(req.body.url)
             .then(response => {
                 const html = parser.parse(response.data);
-                res.send(html.querySelector(req.body.selector).toString())
+                res.send({
+                    ingredients: html.querySelectorAll(req.body.selectors.ingredientSelector).join("").toString(),
+                    directions: html.querySelectorAll(req.body.selectors.directionsSelector).join("").toString()
+                })
             })
     })
 
